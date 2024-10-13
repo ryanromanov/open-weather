@@ -1,6 +1,7 @@
 # ai_engine.py
 import os
 from openai import OpenAI
+import configparser
 
 # possibly should have a "memory" class later
 class AIEngine:
