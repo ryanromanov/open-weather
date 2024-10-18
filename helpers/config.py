@@ -1,8 +1,12 @@
 import configparser
 
 
-def get_ai_attitude_from_file():
+def get_ai_attitude_from_file() -> str:
+    """
+     reads the config.ini file and grabs the ai_attitude property
+
+    :return: the ai_attitude as a string
+    """
     config = configparser.ConfigParser()
     config.read('config.ini')
-    ai_attitude = config.get('ai','ai_attitude')
-    return ai_attitude
+    return config.get('ai', 'ai_attitude')
