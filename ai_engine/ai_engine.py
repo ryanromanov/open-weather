@@ -8,11 +8,11 @@ from helpers import get_ai_attitude_from_file
 # possibly should have a "memory" class later
 class AIEngine:
 
-    def __init__(self):
+    def __init__(self, config_file_name):
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.messages = []
         self.client_attitude = {
-            "role": "system", "content": get_ai_attitude_from_file() or None
+            "role": "system", "content": get_ai_attitude_from_file(config_file_name) or None
         }
 
     def set_ai_attitude(self, attitude):
@@ -21,6 +21,8 @@ class AIEngine:
                 "role": "system", "content": attitude
             }
             self.messages.append(self.client_attitude)
+        else:
+            print('Error: no attitude found')
 
     def send_message_to_client(self, message) -> str:
         """
@@ -32,8 +34,9 @@ class AIEngine:
             raise Exception('message is null')
 
         self.messages.append(
-            {'role': 'user', 'content': message}
+            {'role': 'user', 'content': str(message)}
         )
+
 
         response = self.client.chat.completions.create(
             model="gpt-4o-mini",
@@ -41,6 +44,8 @@ class AIEngine:
             temperature=0.5,
             stream=False,
         )
+
+        print(response)
 
         reply = response.choices[0].message.content
         self.messages.append({"role": "assistant", "content": reply})
