@@ -1,5 +1,6 @@
 from ai_engine import AIEngine
 
+
 class WeatherService:
 
     def __init__(self):
@@ -11,5 +12,5 @@ class WeatherService:
         :param weather_data: weather data in text format
         :return: the summarized weather data
         """
+        weather_data = 'forecast_data: ' + str(weather_data)
         return self.ai_engine.send_message_to_client(weather_data)
-

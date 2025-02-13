@@ -34,7 +34,7 @@ class AIEngine:
             raise Exception('message is null')
 
         self.messages.append(
-            {'role': 'user', 'content': str(message)}
+            {'role': 'user', 'content': message}
         )
 
         response = self.client.chat.completions.create(
