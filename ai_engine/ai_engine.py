@@ -37,7 +37,6 @@ class AIEngine:
             {'role': 'user', 'content': str(message)}
         )
 
-
         response = self.client.chat.completions.create(
             model="gpt-4o-mini",
             messages=self.messages,

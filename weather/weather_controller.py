@@ -8,7 +8,6 @@ class WeatherController:
 
     def __init__(self):
         self.api_key = os.getenv("LOCATIONIQ_API_KEY")
-        print(f"API key set: {self.api_key}")
 
     def get_longitude_and_latitude_url(self, city, state_abbreviation):
         return f"https://us1.locationiq.com/v1/search?key={self.api_key}&q={city},{state_abbreviation}&format=json&"
